@@ -1,0 +1,65 @@
+openapi: 3.0.0
+info:
+  title: User API
+  version: 1.0.0
+  description: Simple API for managing users (GET, POST, DELETE)
+servers:
+  - url: http://localhost:3000
+    description: Local server
+
+paths:
+  /users:
+    get:
+      summary: Get all users
+      tags:
+        - Users
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+
+    post:
+      summary: Create new user
+      tags:
+        - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+      responses:
+        '201':
+          description: User created
+        '400':
+          description: Bad request (missing name)
+
+  /users/{id}:
+    delete:
+      summary: Delete user by ID
+      tags:
+        - Users
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: User deleted
+        '404':
+          description: User not found
