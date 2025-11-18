@@ -8,6 +8,7 @@
  * @returns {number}
  */
 function calculateDiscount(amount, percent) {
+  //TODO: validate negative amount values
   if (typeof amount !== 'number' || typeof percent !== 'number') {
     throw new Error('amount і percent мають бути числами');
   }
